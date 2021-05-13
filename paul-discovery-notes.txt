@@ -1,0 +1,19 @@
+# run openocd
+# openocd -s .\scripts\ -f interface/stlink.cfg -f target/stm32f3x.cfg
+cargo build --target thumbv7em-none-eabihf
+cargo readobj --target thumbv7em-none-eabihf --bin led-roulette -- --file-header
+arm-none-eabi-gdb -q -ex 'target extended-remote :3333' target/thumbv7em-none-eabihf/debug/led-roulette
+
+# gdb commands
+load
+break main
+help
+disassemble /m
+step
+print x
+print &x
+set print asm-demangle on
+stepi / si (look aheah to next step)
+monitor reset halt // puts program at beginning (memory still intact)
+info args
+backtrace

@@ -3,11 +3,15 @@
 > **HEADS UP** The "solder bridge" SB10 (see back of the board) on the STM32F3DISCOVERY, which is
 > required to use the ITM and the `iprint!` macros shown below, is **not** soldered by default
 > (see page 21 of the [User Manual][]).
+> (To be more accurate: this actually depends on the board revision. If you have an old version of
+> the board as the [old User Manual][User Manual v3] said, the SB10 was soldered. Check your board
+> to decide whether you need to fix it.)
 
 > **TL;DR** You have two options to fix this: Either **solder** the solder bridge SB10 or connect a
 > female to female jumper wire between SWO and PB3 as shown in the picture below.
 
 [User Manual]: http://www.st.com/resource/en/user_manual/dm00063382.pdf
+[User Manual v3]: https://docs.rs-online.com/5192/0900766b814876f9.pdf
 
 <p align="center">
 <img height=640 title="Manual SWD connection" src="../assets/f3-swd.png">
@@ -110,7 +114,7 @@ hello_world::__cortex_m_rt_main () at ~/embedded-discovery/src/06-hello-world/sr
 ```
 
 Now issue a `next` command which will exectue `aux6::init()` and
-stop at he next executable statement in `main.rs`, which
+stop at the next executable statement in `main.rs`, which
 positions us at line 12:
 
 ``` text

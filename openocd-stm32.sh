@@ -1,14 +1,14 @@
 #!/bin/bash
 
-project_location='discovery'
+project_location="$HOME/discovery"
 
 function openocd-stm32 {
 	local current_directory=$PWD
 	cd /tmp
 
-	local script='openocd.exe -s ./scripts/ -f interface/stlink.cfg -f target/stm32f3x.cfg'
+	local script='openocd.exe -s ./scripts/ -f interface/stlink.cfg -f target/stm32f3x.cfg -c "bindto 0.0.0.0"'
 	echo $script
-	$script
+	eval $script
 
 	cd $current_directory
 }
@@ -29,4 +29,6 @@ function itmd {
 	trap 'cd $current_directory' EXIT
 }
 
-deno run "$project_location"/get-ip-address-for-gdb-target.ts
+windows_ip_address=$(grep "nameserver" /etc/resolv.conf | sed 's/nameserver //')
+
+sed -i "s/^target remote.*\$/target remote ${windows_ip_address}:3333/" "${project_location}/src/openocd.gdb"

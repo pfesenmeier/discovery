@@ -1,7 +1,4 @@
 import { readLines } from "https://deno.land/std@0.99.0/io/mod.ts";
-import * as path from "https://deno.land/std@0.99.0/path/mod.ts";
-
-const repoLocation = '/home/pfes/discovery';
 
 async function getWindowsIpAddress() {
   const fileReader = await Deno.open("/etc/resolv.conf");
@@ -16,5 +13,4 @@ async function getWindowsIpAddress() {
   throw new Error("Windows IP address not found");
 }
 
-await Deno.open(path.join(repoLocation, 'src/openocd.gdb'));
-// write over file
+console.log(await getWindowsIpAddress());

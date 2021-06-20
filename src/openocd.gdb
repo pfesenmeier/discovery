@@ -1,5 +1,5 @@
 # Connect to gdb remote server
-target remote 172.27.96.1:3333
+target remote 172.21.160.1:3333
 
 # Load will flash the code
 load

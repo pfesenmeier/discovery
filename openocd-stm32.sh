@@ -31,4 +31,5 @@ function itmd {
 
 windows_ip_address=$(grep "nameserver" /etc/resolv.conf | sed 's/nameserver //')
 
-sed -i "s/^target remote.*\$/target remote ${windows_ip_address}:3333/" "${project_location}/src/openocd.gdb"
+find . -name openocd.gdb -exec sed -Ei "s/^target remote.+\$/target remote ${windows_ip_address}:3333/" {} \;
+

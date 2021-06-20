@@ -1,4 +1,4 @@
-target remote :3333
+target remote 172.21.160.1:3333
 set print asm-demangle on
 set print pretty on
 monitor tpiu config internal itm.txt uart off 8000000

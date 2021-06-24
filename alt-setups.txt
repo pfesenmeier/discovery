@@ -1,0 +1,9 @@
+Windows
+  + just works
+  - gdb lacks TUI mode
+Windows + WSL
+  + gdb with TUI mode
+  - a bit more setup
+Windows (+ WSL) + Clion
+  + debugger GUI
+  - logging unsupported

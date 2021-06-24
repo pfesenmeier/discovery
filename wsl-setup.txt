@@ -1,0 +1,17 @@
+WSL Setup
+
+1. Install openocd.exe on your windows side
+2. Follow linux setup from the book (except for setup for openocd)
+
+3. source two files in .bashrc:
+
+   debug.sh
+     puts start-itm function in shell (for logging)
+     puts start-openocd function in shell (for interfacing with board)
+     updates "target remote <windows_ip_addr>:3333" in all openocd.gdb files with current value
+
+   open-browser.sh
+     allows cargo doc --open (or any Ubuntu command) to open files in windows browser
+
+
+

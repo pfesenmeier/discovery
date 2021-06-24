@@ -2,7 +2,7 @@
 
 project_location="$HOME/discovery"
 
-function openocd-stm32 {
+function start-openocd {
 	local current_directory=$PWD
 	cd /tmp
 
@@ -13,7 +13,7 @@ function openocd-stm32 {
 	cd $current_directory
 }
 
-function itmd {
+function start-itm {
 	local current_directory=$PWD
 	cd /tmp
 
@@ -31,5 +31,6 @@ function itmd {
 
 windows_ip_address=$(grep "nameserver" /etc/resolv.conf | sed 's/nameserver //')
 
+# update gdb commands with current windows ip address
 find . -name openocd.gdb -exec sed -Ei "s/^target remote.+\$/target remote ${windows_ip_address}:3333/" {} \;
 

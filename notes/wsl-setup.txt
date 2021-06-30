@@ -1,12 +1,16 @@
 WSL Setup: tested on Ubuntu 20
 
 1. Install openocd.exe on your windows side, according to book's windows instructions. Add it to your path on windows side
+
 2. Follow the necissary linux setup from the book. From what I remember, this should be just getting rust setup, downloading itm, and downloading multiarch-gdb. I *think* you can skip the minicom setup, too. I think we'll use putty.exe from windows instead.
 
 3. source debug.sh in your ~/.bashrc (e.g. ". ~/discovery/debug.sh"):
      puts start-itm function in shell (for logging)
      puts start-openocd function in shell (for interfacing with board)
      updates "target remote <windows_ip_addr>:3333" in all openocd.gdb files with current value every time the file is run / sourced
+
 4. download open-browser.sh and add "export BROWSER=~/pathto/open-browser.sh" to ~/.bashrc 
      allows cargo doc --open (or any Ubuntu command) to open files in windows browser
+
+5. When run for first time, if Windows Defender dialogue opens, choose to allow for openocd to accept connections from other machines
 

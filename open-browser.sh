@@ -1,3 +1,4 @@
+# https://github.com/rust-lang/cargo/issues/7557#issuecomment-791320960
 # open_browser.sh
 #! /bin/bash
 #echo $1

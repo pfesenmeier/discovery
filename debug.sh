@@ -32,5 +32,5 @@ function start-itm {
 windows_ip_address=$(grep "nameserver" /etc/resolv.conf | sed 's/nameserver //')
 
 # update gdb commands with current windows ip address
-find . -name openocd.gdb -exec sed -Ei "s/^target remote.+\$/target remote ${windows_ip_address}:3333/" {} \;
+find $project_location -name openocd.gdb -exec sed -Ei "s/^target remote.+\$/target remote ${windows_ip_address}:3333/" {} \;
 

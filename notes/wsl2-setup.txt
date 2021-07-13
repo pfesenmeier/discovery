@@ -1,4 +1,4 @@
-WSL Setup: tested on Ubuntu 20
+WSL2 Setup: tested on Ubuntu 20
 
 1. Install openocd.exe on your windows side, according to book's windows instructions. Add it to your path on windows side
 

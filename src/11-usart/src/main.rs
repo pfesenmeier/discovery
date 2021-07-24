@@ -10,11 +10,8 @@ use heapless::Vec;
 fn main() -> ! {
     let (usart1, _mono_timer, mut itm) = aux11::init();
 
-    // A buffer with 32 bytes of capacity
     let mut buffer: Vec<u8, 32> = Vec::new();
-
     loop {
-        // TODO Receive a user request. Each user request ends with ENTER
         // Wait until there's data available
         while usart1.isr.read().rxne().bit_is_clear() {}
 
@@ -38,11 +35,4 @@ fn main() -> ! {
             }
         }
     }
-    /*
-      reverse string
-      print out string byte by byte
-     */
-    // TODO Send back the reversed string
 }
-
-

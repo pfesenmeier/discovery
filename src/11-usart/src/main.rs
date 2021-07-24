@@ -31,8 +31,9 @@ fn main() -> ! {
                 buffer.clear();
             }
             _ => {
-                if let Err(x) = buffer.push(byte) {
-                    iprintln!(&mut itm.stim[0], "Error while pushing '{}' to array", x);
+                if let Err(char) = buffer.push(byte) {
+                    let char = char::from(char);
+                    iprintln!(&mut itm.stim[0], "Error while pushing '{}' to array", char);
                 }
             }
         }

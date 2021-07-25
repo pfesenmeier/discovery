@@ -11,4 +11,4 @@ panic-itm = "0.4.2"
 stm32f3-discovery = "0.7.0"
 
 [features]
-adapter = []
+#adapter = []

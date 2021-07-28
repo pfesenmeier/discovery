@@ -47,8 +47,8 @@ fn main() -> ! {
         i2c1.cr2.modify(|_, w| {
             w.start().set_bit();
             w.nbytes().bits(1);
-            w.rd_wrn().clear_bit();
-            w.autoend().clear_bit()
+            w.rd_wrn().set_bit();
+            w.autoend().set_bit()
         });
 
         while i2c1.isr.read().rxne().bit_is_clear() {}

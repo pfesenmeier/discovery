@@ -15,7 +15,6 @@ pub use stm32f3_discovery::{
 };
 
 use stm32f3_discovery::{
-    lsm303dlhc,
     stm32f3xx_hal::{
         gpio::gpiob::{PB6, PB7},
         gpio::AF4,
@@ -27,7 +26,7 @@ use stm32f3_discovery::{
 pub use lsm303agr:: { UnscaledMeasurement};
 use lsm303agr::{interface::I2cInterface, mode, Lsm303agr, MagOutputDataRate};
 
-pub type lsm303agrtype = Lsm303agr<I2cInterface<I2c<I2C1, (PB6<AF4>, PB7<AF4>)>>, mode::MagContinuous>;
+pub type Lsm303agrtype = Lsm303agr<I2cInterface<I2c<I2C1, (PB6<AF4>, PB7<AF4>)>>, mode::MagContinuous>;
 
 /// Cardinal directions. Each one matches one of the user LEDs.
 pub enum Direction {
@@ -49,7 +48,7 @@ pub enum Direction {
     Northwest,
 }
 
-pub fn init() -> (Leds, lsm303agrtype, Delay, ITM) {
+pub fn init() -> (Leds, Lsm303agrtype, Delay, ITM) {
     let cp = cortex_m::Peripherals::take().unwrap();
     let dp = stm32::Peripherals::take().unwrap();
 

@@ -24,13 +24,13 @@ to turn on based on the value of `theta`.
 use core::f32::consts::PI;
 
 #[allow(unused_imports)]
-use aux99::{entry, iprint, iprintln, prelude::*, switch_hal::OutputSwitch, Direction, I16x3};
+use aux98::{entry, iprint, iprintln, prelude::*, switch_hal::OutputSwitch, Direction, I16x3};
 // this trait provides the `atan2` method
 use m::Float;
 
 #[entry]
 fn main() -> ! {
-    let (leds, mut lsm303dlhc, mut delay, _itm) = aux99::init();
+    let (leds, mut lsm303dlhc, mut delay, _itm) = aux98::init();
     let mut leds = leds.into_array();
 
     loop {

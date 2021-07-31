@@ -32,7 +32,7 @@ Putting all this together in a program:
 #![no_std]
 
 #[allow(unused_imports)]
-use aux99::{entry, iprint, iprintln, prelude::*, I16x3};
+use aux98::{entry, iprint, iprintln, prelude::*, I16x3};
 use m::Float;
 
 #[entry]
@@ -40,7 +40,7 @@ fn main() -> ! {
     const XY_GAIN: f32 = 1100.; // LSB / G
     const Z_GAIN: f32 = 980.; // LSB / G
 
-    let (_leds, mut lsm303dlhc, mut delay, mut itm) = aux99::init();
+    let (_leds, mut lsm303dlhc, mut delay, mut itm) = aux98::init();
 
     loop {
         let I16x3 { x, y, z } = lsm303dlhc.mag().unwrap();

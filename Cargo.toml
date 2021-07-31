@@ -10,6 +10,7 @@ members = [
   "src/15-led-compass",
   "src/16-punch-o-meter",
   "src/99-external-i2c",
+  "src/98-sht31d",
 ]
 
 [profile.release]

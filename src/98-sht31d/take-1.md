@@ -36,11 +36,11 @@ Let's try that logic. Here's the starter code:
 #![no_std]
 
 #[allow(unused_imports)]
-use aux99::{entry, iprint, iprintln, prelude::*, switch_hal::OutputSwitch, Direction, I16x3};
+use aux98::{entry, iprint, iprintln, prelude::*, switch_hal::OutputSwitch, Direction, I16x3};
 
 #[entry]
 fn main() -> ! {
-    let (leds, mut lsm303dlhc, mut delay, _itm) = aux99::init();
+    let (leds, mut lsm303dlhc, mut delay, _itm) = aux98::init();
     let mut leds = leds.into_array();
 
     loop {

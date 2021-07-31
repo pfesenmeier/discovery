@@ -7,10 +7,11 @@ use aux99::{entry, iprint, iprintln, prelude::*};
 
 #[entry]
 fn main() -> ! {
-    let (_leds, mut lsm303agr, mut delay, mut itm) = aux99::init();
+    let (mut bme280, mut itm) = aux99::init();
 
-    loop {
-        iprintln!(&mut itm.stim[0], "{:?}", lsm303agr.mag_data().unwrap());
-        delay.delay_ms(1_000_u16);
-    }
+        let measurements = bme280.measure().unwrap();
+        iprintln!(&mut itm.stim[0], "Relative Humidity = {}%", measurements.humidity);
+        iprintln!(&mut itm.stim[0], "Temperature = {} deg C", measurements.temperature);
+        iprintln!(&mut itm.stim[0], "Pressure = {} pascals", measurements.pressure);
+    loop {}
 }

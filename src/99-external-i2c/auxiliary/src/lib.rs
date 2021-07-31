@@ -27,7 +27,7 @@ pub use lsm303agr:: { UnscaledMeasurement};
 use lsm303agr::{interface::I2cInterface, mode, Lsm303agr, MagOutputDataRate};
 use bme280::BME280;
 
-pub type Bme280 = BME280<I2c<I2C1, (PB6<AF4>, PB7<AF4>)>, Delay>;
+pub type Bme280 = BME280<I2c<I2C1, (PB6<AF4>, PB7<AF4>)>>;
 
 /// Cardinal directions. Each one matches one of the user LEDs.
 pub enum Direction {
@@ -49,7 +49,7 @@ pub enum Direction {
     Northwest,
 }
 
-pub fn init() -> (Bme280, ITM) {
+pub fn init() -> (Bme280, Delay, ITM) {
     let cp = cortex_m::Peripherals::take().unwrap();
     let dp = stm32::Peripherals::take().unwrap();
 
@@ -77,11 +77,11 @@ pub fn init() -> (Bme280, ITM) {
     let sda = gpiob.pb7.into_af4(&mut gpiob.moder, &mut gpiob.afrl);
 
     let i2c = I2c::new(dp.I2C1, (scl, sda), 400.khz(), clocks, &mut rcc.apb1);
-    let delay = Delay::new(cp.SYST, clocks);
+    let mut delay = Delay::new(cp.SYST, clocks);
 
-    let mut bme280 = BME280::new_primary(i2c, delay);
+    let mut bme280 = BME280::new_primary(i2c);
 
-    bme280.init().unwrap();
+    bme280.init(&mut delay).unwrap();
 
-    (bme280, cp.ITM)
+    (bme280, delay, cp.ITM)
 }

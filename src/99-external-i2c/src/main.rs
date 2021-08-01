@@ -12,7 +12,11 @@ fn main() -> ! {
     loop {
         let measurements = bme280.measure(&mut delay).unwrap();
         // iprintln!(&mut itm.stim[0], "Relative Humidity = {}%", measurements.humidity);
-        iprintln!(&mut itm.stim[0], "Temperature = {} deg C", measurements.temperature);
+
+        let celsius: f64 = measurements.temperature as f64;
+        let farenheit = (celsius * 9.0 / 5.0) + 32.0;
+
+        iprintln!(&mut itm.stim[0], "{:.2} deg F", farenheit);
         // iprintln!(&mut itm.stim[0], "Pressure = {} pascals", measurements.pressure);
         delay.delay_ms(1000_u16);
     }

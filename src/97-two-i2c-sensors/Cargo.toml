@@ -1,0 +1,10 @@
+[package]
+authors = ["Jorge Aparicio <jorge@japaric.io>"]
+edition = "2018"
+name = "two-i2c-sensors"
+version = "0.1.0"
+
+[dependencies]
+m = "0.1.1"
+aux97 = { path = "auxiliary" }
+sht3x = { git = "https://github.com/sciguy16/sht3x-rs", branch = "borrow_delay"}

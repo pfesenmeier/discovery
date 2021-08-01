@@ -11,6 +11,7 @@ members = [
   "src/16-punch-o-meter",
   "src/99-external-i2c",
   "src/98-sht31d",
+  "src/97-two-i2c-sensors",
 ]
 
 [profile.release]

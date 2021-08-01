@@ -7,6 +7,7 @@ extern crate panic_itm; // panic handler
 
 pub use cortex_m::{asm::bkpt, iprint, iprintln, peripheral::ITM};
 pub use cortex_m_rt::entry;
+pub use switch_hal::{ActiveHigh, OutputSwitch, Switch, ToggleableOutputSwitch};
 pub use stm32f3_discovery::{
     leds::Leds,
     lsm303dlhc::I16x3,
@@ -18,12 +19,14 @@ use stm32f3_discovery::{
     stm32f3xx_hal::{
         gpio::gpiob::{PB6, PB7},
         gpio::AF4,
+        gpio::{gpioe, Output, PushPull},
         i2c::I2c,
         prelude::*,
         stm32::{self, I2C1},
     },
 };
 
+pub type LedArray = [Switch<gpioe::PEx<Output<PushPull>>, ActiveHigh>; 8];
 /// Cardinal directions. Each one matches one of the user LEDs.
 pub enum Direction {
     /// North / LD3
@@ -44,7 +47,8 @@ pub enum Direction {
     Northwest,
 }
 
-pub fn init() -> (I2c<I2C1, (PB6<AF4>, PB7<AF4>)>, Delay, ITM) {
+#[allow(clippy::type_complexity)]
+pub fn init() -> (I2c<I2C1, (PB6<AF4>, PB7<AF4>)>, Delay, LedArray, ITM) {
     let cp = cortex_m::Peripherals::take().unwrap();
     let dp = stm32::Peripherals::take().unwrap();
 
@@ -74,5 +78,5 @@ pub fn init() -> (I2c<I2C1, (PB6<AF4>, PB7<AF4>)>, Delay, ITM) {
     let i2c = I2c::new(dp.I2C1, (scl, sda), 400.khz(), clocks, &mut rcc.apb1);
     let delay = Delay::new(cp.SYST, clocks);
 
-    (i2c, delay, cp.ITM)
+    (i2c, delay, leds.into_array(), cp.ITM)
 }

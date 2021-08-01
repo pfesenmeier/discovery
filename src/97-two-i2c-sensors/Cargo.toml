@@ -8,3 +8,5 @@ version = "0.1.0"
 m = "0.1.1"
 aux97 = { path = "auxiliary" }
 sht3x = { git = "https://github.com/sciguy16/sht3x-rs", branch = "borrow_delay"}
+bme280 = { git = "https://github.com/David-OConnor/bme280-rs/", branch = "borrow_delay"}
+shared-bus = "0.2.2"

@@ -13,9 +13,10 @@ fn main() -> ! {
 
     loop {
         let measurements = sht3x.measure(Repeatability::High, &mut delay).unwrap();
-        // iprintln!(&mut itm.stim[0], "Relative Humidity = {}%", measurements.humidity);
-        iprintln!(&mut itm.stim[0], "Temperature = {} deg C", measurements.temperature);
-        // iprintln!(&mut itm.stim[0], "Pressure = {} pascals", measurements.pressure);
+        let celsius: f64 = measurements.temperature as f64 / 100.0;
+        let farenheit = (celsius * 9.0 / 5.0) + 32.0;
+
+        iprintln!(&mut itm.stim[0], "{:.2} ", farenheit);
         delay.delay_ms(1000_u16);
     }
 }

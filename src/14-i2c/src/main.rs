@@ -90,7 +90,18 @@ fn main() -> ! {
             *byte = i2c1.rxdr.read().rxdata().bits();
         }
 
-        iprintln!(&mut itm.stim[0], "{:?}", buffer);
+        let x_l = u16::from(buffer[0]);
+        let x_h = u16::from(buffer[1]);
+        let y_l = u16::from(buffer[2]);
+        let y_h = u16::from(buffer[3]);
+        let z_l = u16::from(buffer[4]);
+        let z_h = u16::from(buffer[5]);
+
+        let x = ((x_h << 8) + x_l) as i16;
+        let y = ((y_h << 8) + y_l) as i16;
+        let z = ((z_h << 8) + z_l) as i16;
+
+        iprintln!(&mut itm.stim[0], "{:?}", (x,y,z));
         delay.delay_ms(1000_u16);
     }
 }

@@ -23,7 +23,7 @@ use stm32f3_discovery::{
         stm32::{self, I2C1},
     },
 };
-pub use lsm303agr:: { UnscaledMeasurement};
+pub use lsm303agr:: {Measurement};
 use lsm303agr::{interface::I2cInterface, mode, Lsm303agr, MagOutputDataRate};
 
 pub type Lsm303agrtype = Lsm303agr<I2cInterface<I2c<I2C1, (PB6<AF4>, PB7<AF4>)>>, mode::MagContinuous>;

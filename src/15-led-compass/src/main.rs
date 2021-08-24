@@ -23,36 +23,29 @@ fn main() -> ! {
         let theta = (y as f32).atan2(x as f32); // in radians
         iprintln!(&mut itm.stim[0], "{}", theta);
 
-        // FIXME pick a direction to point to based on `theta`
-        let dir = match theta {
-            // 22.5 to -22.5
-            theta if 0.39 > theta && theta > -0.39 => Direction::North,
-            // 22.5 to 67.5
-            theta if 1.18 > theta && theta > 0.39 => Direction::Northwest,
-            // 112.5 to 67.5
-            theta if 1.96 > theta && theta > 1.18 => Direction::West,
-            // 112.5 to 157.5
-            theta if 2.75 > theta && theta > 1.96 => Direction::Southwest,
-            theta if (PI > theta && theta > 2.75) || (-PI < theta && theta < -2.75) => {
-                Direction::South
-            }
-            theta if -2.75 < theta && theta < -1.96 => Direction::Southeast,
-            theta if -1.96 < theta && theta < -1.18 => Direction::East,
-            theta if -1.18 < theta && theta < -0.39 => Direction::Northeast,
-            _ => Direction::North,
+        // angle(0) is dead North, angle(4) is West, angle(-2) is Northeast, and so on
+        fn angle(num: i8) -> f32 {
+            num as f32 / 8. * PI
+        }
+
+        let is_between = |smaller, bigger| {
+            theta > angle(smaller) && theta < angle(bigger)
         };
-        // b/t -1/4 and 1/4
-        // b/t 1/4 and 3/4
-        // b/t 3/4 and 5/4
-        // b/t 5/4 and 7/4
-        // b/t 7/4 and -7/4
-        // b/t -1/4 and -3/4
-        // b/t -3/4 and -5/4
-        // b/t -5/4 and -7/4
+
+        let dir = match theta {
+            _theta if is_between(-7, -5) => Direction::Southeast,
+            _theta if is_between(-5, -3) => Direction::East,
+            _theta if is_between(-3, -1) => Direction::Northeast,
+            _theta if is_between(-1, 1) => Direction::North,
+            _theta if is_between(1, 3) => Direction::Northwest,
+            _theta if is_between(3, 5) => Direction::West,
+            _theta if is_between(5, 7) => Direction::Southwest,
+            _ => Direction::South,
+        };
 
         leds.iter_mut().for_each(|led| led.off().unwrap());
         leds[dir as usize].on().unwrap();
 
-        delay.delay_ms(100_u8);
+        delay.delay_ms(10_u8);
     }
 }

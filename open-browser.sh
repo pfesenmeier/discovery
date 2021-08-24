@@ -1,12 +1,17 @@
-# https://github.com/rust-lang/cargo/issues/7557#issuecomment-791320960
-# open-browser.sh
 #! /bin/bash
 
-winPath="file://///wsl$//Ubuntu${1}"
+# firefox
+BROWSER="/mnt/c/Program Files/Mozilla Firefox/firefox.exe"
 
-#firefox
-#/mnt/c/Program\ Files/Mozilla\ Firefox/firefox.exe $winPath
+# chrome
+# BROWSER="/mnt/c/Program Files/Google/Chrome/Application/chrome.exe" 
 
-#chrome
-/mnt/c/Program\ Files/Google/Chrome/Application/chrome.exe $winPath
+# if launched from gh
+if echo $1 | grep -q "github"; then
+ "$BROWSER" $1
+ exit 0
+fi
+
+# if launched from cargo
+"$BROWSER" "file://///wsl$//Ubuntu${1}"
 
